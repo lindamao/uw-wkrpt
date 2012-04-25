@@ -17,8 +17,8 @@
 %   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 %
 % \fi
-% \def\fileversion{v2.8}
-% \def\filedate{2012/04/24}
+% \def\fileversion{v2.8.1}
+% \def\filedate{2012/04/25}
 % \iffalse
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesPackage{uw-wkrpt}[2012/04/24 v2.8 U. of Waterloo work reports]
@@ -50,7 +50,7 @@
 % \fi
 %
 % \StopEventually{\PrintIndex \PrintChanges}
-% \CheckSum{1116}
+% \CheckSum{1108}
 %
 % \DoNotIndex{\#,\$,\#,\&,\@,\\,\{,\},\^,\_,\~,\ }
 % \DoNotIndex{\addcontentsline, \addpenalty, \addtolength, \advance, \and}
@@ -270,10 +270,6 @@
 % \begin{verbatim}\documentclass[math]{uw-wkrpt}\end{verbatim}
 % Notice how |[math]| is enclosed by square brackets.  Other valid
 % options are |[ece]| and |[se]|.
-%
-% As well, the letter of submittal may be formatted in either modified
-% block, or block format.  The default is modified block.  This can be
-% controlled with the |[modifiedletter]| and |[blockletter]| options.
 %
 % Note that no text may appear before the |\documentclass| command.
 % \end{DescribeEnv}
@@ -818,22 +814,10 @@
 %
 % \changes{v2.0}{2003/04/25}{Enforce 12 pt.\ type.}
 % \changes{v2.7}{2011/09/16}{Enforce 11 pt.\ type for ECE reports.}
-%
-% Finally, we declare a |blockletter| option that formats the
-% letter of submittal in block format.  The default letter format 
-% is modified block, which correspondes to |modifiedletter|.
-%    \begin{macrocode}
-\newcommand{\@blockletter}{}
-\DeclareOption{modifiedletter}{%
-  \renewcommand{\@blockletter}{}}
-\DeclareOption{blockletter}{%
-  \renewcommand{\@blockletter}{%
-    \setlength{\parindent}{0pt}
-    \setlength{\parskip}{0.8em}}}
-%    \end{macrocode}
-%
 % \changes{v2.8}{2012/04/24}{Fix bug so letter format options work. Adjust the
 %                            spacing for `blockletter' format.}
+% \changes{v2.8.1}{2012/04/25}{Remove `blockletter' and `modifiedletter'
+%                              options.}
 %
 % All of the options specific to this class are declared.  The rest of
 % the options will be passed to the standard \LaTeXe{} \textsf{article}
@@ -1204,14 +1188,15 @@
     {\raggedright}{}
 %    \end{macrocode}
 %
-% Using |\@blockletter|, we decide whether we should be using modified
-% block layout, or full block.  For the declaration of this macro, see
-% Section \ref{sec:parseopts}.
+% We use the standard business letter format, which means paragraphs
+% are not indented.
 %    \begin{macrocode}
-  \@blockletter%
+  \setlength{\parindent}{0pt}
+  \setlength{\parskip}{\uwwkrpt@parskip}
 %    \end{macrocode}
 %
 % \changes{v2.0}{2003/04/26}{New options for letter formats.}
+% \changes{v2.8.1}{2012/04/25}{All letter formats are now the same.}
 %
 % Then, the letter is set to single-spaced, since it is not part of the
 % report; but rather an insert.
