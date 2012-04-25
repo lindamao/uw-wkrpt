@@ -6,6 +6,10 @@ uw-wkrpt.cls
 uw-wkrpt.drv
 uw-wkrpt.pdf
 
+# Ignore biber files
+*.bcf
+*.run.xml
+
 # Taken from https://github.com/github/gitignore/blob/master/LaTeX.gitignore
 *.acn
 *.acr

@@ -14,9 +14,8 @@ all: report.tex report.bib latexmk.pl uw-wkrpt.cls
 
 clean:
 	perl latexmk.pl -c
-	rm -f report.bbl
+	rm -f report.bcf
 	rm -f report.run.xml
-	rm -f report-blx.bib
 
 clean-all: clean
 	rm -f report.pdf
