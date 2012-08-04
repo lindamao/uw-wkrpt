@@ -21,7 +21,6 @@ PACKAGE = uw-wkrpt
 
 # Use pdfLaTeX for best results
 LATEX = pdflatex
-LATEX2DVI = $(LATEX) --output-format=dvi
 LATEX2PDF = $(LATEX) --output-format=pdf
 
 # MakeIndex parameters
@@ -34,7 +33,6 @@ BIBTEX = bibtex
 BIBER = biber
 
 # Texi2DVI knows most about compilation
-TEXI2DVI = LATEX="$(LATEX2DVI)" texi2dvi -l latex
 TEXI2PDF = PDFLATEX="$(LATEX2PDF)" texi2dvi -l latex -p
 
 # Installation
@@ -68,38 +66,27 @@ TEXFILES=\
          $(PACKAGE)*.out\
          $(PACKAGE)*.run.xml
 
-.PHONY : all examples install uninstall dvi pdf examples-dvi examples-pdf clean
+.PHONY : all examples install uninstall pdf examples-pdf clean
 
-all : $(PACKAGE).cls $(PACKAGE).dvi $(PACKAGE).pdf ;
+all : $(PACKAGE).cls $(PACKAGE).pdf ;
 
-examples : examples-dvi examples-pdf ;
+examples : examples-pdf ;
 
 install : all examples
 	$(INSTALL) -d $(DESTDIR)/texmf/tex/$(TDSFORMAT)/$(PACKAGE)
 	$(INSTALL) -d $(DESTDIR)/texmf/doc/$(TDSFORMAT)/$(PACKAGE)
 	$(INSTALL) -d $(DESTDIR)/texmf/doc/$(TDSFORMAT)/$(PACKAGE)/examples
 	$(INSTALL_DATA) $(PACKAGE).cls $(DESTDIR)/texmf/tex/$(TDSFORMAT)/$(PACKAGE)/
-	$(INSTALL_DATA) $(PACKAGE).dvi $(DESTDIR)/texmf/doc/$(TDSFORMAT)/$(PACKAGE)/
 	$(INSTALL_DATA) $(PACKAGE).pdf $(DESTDIR)/texmf/doc/$(TDSFORMAT)/$(PACKAGE)/
 	$(INSTALL_DATA) $(PACKAGE)-*.tex $(DESTDIR)/texmf/doc/$(TDSFORMAT)/$(PACKAGE)/examples
-	$(INSTALL_DATA) $(PACKAGE)-*.dvi $(DESTDIR)/texmf/doc/$(TDSFORMAT)/$(PACKAGE)/examples
 	$(INSTALL_DATA) $(PACKAGE)-*.pdf $(DESTDIR)/texmf/doc/$(TDSFORMAT)/$(PACKAGE)/examples
 
 uninstall :
 	$(RM) $(DESTDIR)/texmf/tex/$(TDSFORMAT)/$(PACKAGE)/$(PACKAGE).cls
-	$(RM) $(DESTDIR)/texmf/doc/$(TDSFORMAT)/$(PACKAGE)/$(PACKAGE).dvi
 	$(RM) $(DESTDIR)/texmf/doc/$(TDSFORMAT)/$(PACKAGE)/$(PACKAGE).pdf
 	$(RM) -r $(DESTDIR)/texmf/doc/$(TDSFORMAT)/$(PACKAGE)/examples
 	-rmdir -p $(DESTDIR)/texmf/doc/$(TDSFORMAT)/$(PACKAGE)
 	-rmdir -p $(DESTDIR)/texmf/tex/$(TDSFORMAT)/$(PACKAGE)
-
-dvi : $(PACKAGE).dvi ;
-
-examples-dvi : $(PACKAGE).cls    \
-               $(PACKAGE)-cecs.dvi \
-	       $(PACKAGE)-ece.dvi  \
-	       $(PACKAGE)-math.dvi \
-	       $(PACKAGE)-se.dvi   ;
 
 pdf : $(PACKAGE).pdf ;
 
@@ -112,27 +99,14 @@ examples-pdf : $(PACKAGE).cls    \
 %.cls : %.ins %.dtx
 	$(LATEX) $<
 
-$(PACKAGE)-%.dvi : $(PACKAGE)-%.tex $(PACKAGE).cls don-hires.eps
-	$(TEXI2DVI) $<
-
 # This is redundant, but the SE example needs biblatex to run
 $(PACKAGE)-se.pdf : $(PACKAGE)-se.tex $(PACKAGE).cls
 	$(TEXI2PDF) $<
 	$(BIBER) $(PACKAGE)-se
 	$(TEXI2PDF) $<
 
-%.dvi : %.tex $(PACKAGE).cls
-	$(TEXI2DVI) $<
-
 %.pdf : %.tex $(PACKAGE).cls
 	$(TEXI2PDF) $<
-
-$(PACKAGE).dvi : $(PACKAGE).dtx $(PACKAGE).cls
-	$(TEXI2DVI) $<
-	$(MAKEINDEX) -s $(GIND) $(PACKAGE).idx
-	$(MAKEINDEX) -s $(GGLO) -o $(PACKAGE).gls $(PACKAGE).glo
-	$(LATEX2DVI) $<
-	$(LATEX2DVI) $<
 
 $(PACKAGE).pdf : $(PACKAGE).dtx $(PACKAGE).cls
 	$(TEXI2PDF) $<
