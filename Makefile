@@ -31,6 +31,7 @@ GGLO = gglo.ist
 
 # Bibliography
 BIBTEX = bibtex
+BIBER = biber
 
 # Texi2DVI knows most about compilation
 TEXI2DVI = LATEX="$(LATEX2DVI)" texi2dvi -l latex
@@ -110,6 +111,12 @@ examples-pdf : $(PACKAGE).cls    \
 
 $(PACKAGE)-%.dvi : $(PACKAGE)-%.tex $(PACKAGE).cls don-hires.eps
 	$(TEXI2DVI) $<
+
+# This is redundant, but the SE example needs biblatex to run
+$(PACKAGE)-se.pdf : $(PACKAGE)-se.tex $(PACKAGE).cls
+	$(TEXI2PDF) $<
+	$(BIBER) $(PACKAGE)-se
+	$(TEXI2PDF) $<
 
 %.dvi : %.tex $(PACKAGE).cls
 	$(TEXI2DVI) $<
