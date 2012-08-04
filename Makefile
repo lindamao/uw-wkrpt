@@ -63,7 +63,10 @@ TEXFILES=\
          $(PACKAGE)*.log\
          $(PACKAGE)*.pdf\
          $(PACKAGE)*.sty\
-         $(PACKAGE)*.toc
+         $(PACKAGE)*.toc\
+         $(PACKAGE)*.bcf\
+         $(PACKAGE)*.out\
+         $(PACKAGE)*.run.xml
 
 .PHONY : all examples install uninstall dvi pdf examples-dvi examples-pdf clean
 
