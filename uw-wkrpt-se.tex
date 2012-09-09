@@ -29,6 +29,8 @@
 
 \usepackage{indentfirst} % Indent first paragraph of each section
 
+\usepackage[titletoc,title]{appendix} % Prefix appendix letters with `Appendix'
+
 % For mathematical symbols in our pseudocode
 \usepackage{amsmath}
 
@@ -493,6 +495,7 @@ typeset it.
 %%
 %% Don't forget to refer to all your appendices in the main report.
 \appendix
+\begin{appendices}
 
 \section{Bugs}\label{app:bugs}
 Currently, there are some known problems with this document class.
@@ -503,6 +506,12 @@ Currently, there are some known problems with this document class.
         insist on using word processors.
   \item It does not bring world peace.
 \end{itemize}
+
+\subsection{Subsection}
+
+foobar
+
+\subsubsection{subsubsection}
 
 Fixes for these bugs are most certainly welcome.  Please provide a patch
 against the document class document.
@@ -898,4 +907,5 @@ Public License instead of this License.
 
 \end{singlespacing}
 
+\end{appendices}
 \end{document}

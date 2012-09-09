@@ -17,11 +17,11 @@
 %   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 %
 % \fi
-% \def\fileversion{v2.8.1}
-% \def\filedate{2012/04/25}
+% \def\fileversion{v2.8.2}
+% \def\filedate{2012/09/09}
 % \iffalse
 %<class>\NeedsTeXFormat{LaTeX2e}
-%<class>\ProvidesPackage{uw-wkrpt}[2012/04/24 v2.8 U. of Waterloo work reports]
+%<class>\ProvidesPackage{uw-wkrpt}[2012/09/09 v2.8.2 UWaterloo work reports]
 %<*driver>
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \documentclass[letterpaper]{ltxdoc}
@@ -50,7 +50,7 @@
 % \fi
 %
 % \StopEventually{\PrintIndex \PrintChanges}
-% \CheckSum{1108}
+% \CheckSum{1106}
 %
 % \DoNotIndex{\#,\$,\#,\&,\@,\\,\{,\},\^,\_,\~,\ }
 % \DoNotIndex{\addcontentsline, \addpenalty, \addtolength, \advance, \and}
@@ -1445,7 +1445,7 @@
     \renewcommand{\@secdotzerostart}[1]{\renewcommand{\dotzero}{}}
     \renewcommand{\@secdotzeroend}[1]{}
     }{}%
-  \ifthenelse{\boolean{uwwkrpt@ece} \or \boolean{uwwkrpt@se}}
+  \ifthenelse{\boolean{uwwkrpt@ece}}
     {\renewcommand{\@appendixtitle}{Appendix }}{}
   \appendix@rig%
 }
@@ -1454,6 +1454,9 @@
 % \changes{v2.5}{2003/05/10}{Fix section numbering in Appendices.}
 % \changes{v2.6}{2003/05/20}{`Appendix' should prefix appendix numbers.}
 % \changes{v2.8}{2012/04/24}{`Appendix' prefixes appendix numbers for SE.}
+% \changes{v2.8.2}{2012/09/09}{`Appendix' prefix for SE reports is moved to
+%                              .tex file, where there's more control over its
+%                              settings.}
 % \end{macro}
 %
 % \begin{macro}{\backmatter}
