@@ -17,8 +17,8 @@
 %   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 %
 % \fi
-% \def\fileversion{v2.8.2}
-% \def\filedate{2012/09/09}
+% \def\fileversion{v2.8.3}
+% \def\filedate{2012/09/16}
 % \iffalse
 %<class>\NeedsTeXFormat{LaTeX2e}
 %<class>\ProvidesPackage{uw-wkrpt}[2012/09/09 v2.8.2 UWaterloo work reports]
@@ -50,7 +50,7 @@
 % \fi
 %
 % \StopEventually{\PrintIndex \PrintChanges}
-% \CheckSum{1106}
+% \CheckSum{1131}
 %
 % \DoNotIndex{\#,\$,\#,\&,\@,\\,\{,\},\^,\_,\~,\ }
 % \DoNotIndex{\addcontentsline, \addpenalty, \addtolength, \advance, \and}
@@ -315,6 +315,11 @@
 % identification number.
 % \end{DescribeMacro}
 %
+% \begin{DescribeMacro}{\signature}
+% The |\signature|\marg{text} command defines the name of the PNG file
+% with the student's signature. Only required for SE reports.
+% \end{DescribeMacro}
+%
 % \begin{DescribeMacro}{\address}
 % The |\address|\marg{text} command defines the author's home address.
 % Since an address can span multiple lines, each line is separated with 
@@ -458,6 +463,7 @@
 % \begin{DescribeMacro}{\theauthor}
 % \begin{DescribeMacro}{\thetitle}
 % \begin{DescribeMacro}{\theuwid}
+% \begin{DescribeMacro}{\thesignature}
 % \begin{DescribeMacro}{\theaddress}
 % \begin{DescribeMacro}{\theemployer}
 % \begin{DescribeMacro}{\theemployeraddress}
@@ -467,6 +473,7 @@
 % command defined in the previous sections.  Although these macros
 % can be used anywhere in the report, they are used primarily in the 
 % \textbf{letter} environment, see Section \ref{sec:prelim}.
+% \end{DescribeMacro}
 % \end{DescribeMacro}
 % \end{DescribeMacro}
 % \end{DescribeMacro}
@@ -956,6 +963,7 @@
 % \end{macro}
 %
 % \begin{macro}{\uwid}
+% \begin{macro}{\signature}
 % \begin{macro}{\address}
 % \begin{macro}{\employer}
 % \begin{macro}{\employeraddress}
@@ -976,6 +984,9 @@
 \newcommand{\uwid}[1]{\renewcommand{\@uwid}{#1}}
   \newcommand{\@uwid}{\ClassError{uw-wkrpt}%
     {No \noexpand\uwid given}{}}
+\newcommand{\signature}[1]{\renewcommand{\@signature}{#1}}
+  \newcommand{\@signature}{\ClassError{uw-wkrpt}%
+    {No \noexpand\signature given}{}}
 \newcommand{\address}[1]{\renewcommand{\@address}{#1}}
   \newcommand{\@address}{\ClassError{uw-wkrpt}%
     {No \noexpand\address given}{}}
@@ -1024,6 +1035,7 @@
 % \end{macro}
 % \end{macro}
 % \end{macro}
+% \end{macro}
 %
 % \begin{macro}{\confidential}
 % |\confidential| is an optional value, see Section \ref{sec:optvalues}.
@@ -1039,6 +1051,7 @@
 % \begin{macro}{\theauthor}
 % \begin{macro}{\thedate}
 % \begin{macro}{\theuwid}
+% \begin{macro}{\thesignature}
 % \begin{macro}{\theaddress}
 % \begin{macro}{\theemployer}
 % \begin{macro}{\theemployeraddress}
@@ -1057,6 +1070,7 @@
 \newcommand{\thetitle}{\@@title}
 \newcommand{\theauthor}{\@@author}
 \newcommand{\theuwid}{\@uwid}
+\newcommand{\thesignature}{\@signature}
 \newcommand{\theaddress}{\@address}
 \newcommand{\theemployer}{\@employer}
 \newcommand{\theemployeraddress}{\@employeraddress}
@@ -1071,6 +1085,7 @@
 \newcommand{\thedate}{\@@date}
 \newcommand{\theconfidential}{\@confidential}
 %    \end{macrocode}
+% \end{macro}
 % \end{macro}
 % \end{macro}
 % \end{macro}
@@ -1280,9 +1295,12 @@
 % but that should be sufficient for most purposes.  To satisfy Section
 % 9.1 of the CESRM~\cite{ref:cesrm}, the student's name and ID are
 % listed below the signature line.
+%
 % Software Engineering only requires the signature, student's name, and
-% student's ID. No signature line is required. Furthermore, the signature
-% block is indented.
+% student's ID. No signature line is required and the signature block is
+% indented. Additionally, because of electronic submissions, a PNG file
+% with the student's signature can be specified, and it will be
+% automatically inserted.
 %    \begin{macrocode}
   \par\noindent
   \begin{minipage}{\textwidth}
@@ -1291,8 +1309,9 @@
   \vspace*{\uwwkrpt@parskip}
   \ifthenelse{\boolean{uwwkrpt@se}}{
   Sincerely,
-  \vspace*{0.75in}\\
-  \indent\@@author\\
+  \vspace*{0.75em}\\
+  \indent \includegraphics{\@signature}\\
+  \indent \@@author\\
   \indent Student ID: \@uwid}%
   {Yours sincerely,\\*%
   \rule{0in}{0.3in}\\*{\hrule \@width 3in}%
@@ -1304,6 +1323,7 @@
 %
 % \changes{v2.2}{2003/05/02}{Keep the signature block together.}
 % \changes{v2.8}{2012/04/24}{More SE-only tweaks to the signature block.}
+% \changes{v2.8.3}{2012/09/16}{Add signature image for SE reports.}
 %
 % Now that the letter is done, we set the correct page number for pages
 % that follow the letter, and then restore double-spacing.
@@ -1322,6 +1342,8 @@
   \global\let\@@date\@empty
   \global\let\uwid\relax
   \global\let\@uwid\@empty
+  \global\let\@signature\relax
+  \global\let\signature\relax
   \global\let\userid\relax
   \global\let\@userid\@empty
   \global\let\email\relax
@@ -1820,6 +1842,7 @@
 % \end{environment}
 % \end{environment}
 % \changes{v2.8}{2012/04/24}{Modify the table/figure labels for SE reports.}
+% \changes{v2.8.3}{2012/04/24}{Update table/figure labels for SE reports.}
 %
 % \subsection{References}
 %
