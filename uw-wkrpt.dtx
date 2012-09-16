@@ -50,7 +50,7 @@
 % \fi
 %
 % \StopEventually{\PrintIndex \PrintChanges}
-% \CheckSum{1131}
+% \CheckSum{1135}
 %
 % \DoNotIndex{\#,\$,\#,\&,\@,\\,\{,\},\^,\_,\~,\ }
 % \DoNotIndex{\addcontentsline, \addpenalty, \addtolength, \advance, \and}
@@ -899,13 +899,16 @@
 % letter `x'.}
 %    \begin{macrocode}
 \newlength{\uwwkrpt@parskip}
-\setlength{\uwwkrpt@parskip}{1ex}
+\ifthenelse{\boolean{uwwkrpt@se}}
+  {\setlength{\uwwkrpt@parskip}{1em}}
+  {\setlength{\uwwkrpt@parskip}{1ex}}
 \setlength{\parskip}{\uwwkrpt@parskip}
 \ifthenelse{\boolean{uwwkrpt@se}}{\setlength{\parindent}{0.4in}}{}
 %    \end{macrocode}
 % \changes{v2.0}{2003/04/21}{Set paragraph spacing correctly.}
 % \changes{v2.1}{2003/05/02}{Set a standard paragraph skip.}
 % \changes{v2.8}{2012/04/24}{Increase the paragraph indent for SE reports.}
+% \changes{v2.8.3}{2012/09/16}{Increase the paragraph skip for SE reports.}
 %
 % \subsection{Miscellaneous packages}
 %
