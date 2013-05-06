@@ -2,8 +2,9 @@
 *.DS_Store
 
 # Ignore generated files
+# Intentionally allow *.cls file for convenience
 uw-ece-workreport.cls
-uw-wkrpt.cls
+#uw-wkrpt.cls
 uw-wkrpt.drv
 uw-wkrpt*.pdf
 
