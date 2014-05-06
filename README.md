@@ -21,7 +21,7 @@ really quite helpful. You can read any of the example work reports, as well as:
 You can also find more information on-line.  There is an [FAQ][3] and a
 [page listing documentation for beginners][4].
 
-[2]: http://people.ee.ethz.ch/~oetiker/lshort/
+[2]: http://tobi.oetiker.ch/lshort/
 [3]: http://faq.tug.org
 [4]: http://www.tug.org/begin.html
 
