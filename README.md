@@ -66,6 +66,16 @@ lines:
 You will want to comment out any other instances of `page_width` and
 `page_height` by using the `%` character.
 
+### Dockerfile
+
+If you use Docker, lucaswoj has provided a [Dockerfile][5] to automate the LaTeX
+setup.
+
+Note that this method is not officially supported or endorsed. It is mentioned
+only in the hope that some users find it useful.
+
+[5]: https://gist.github.com/lucaswoj/176af70493aa4a37cbf8
+
 ## Examples
 
 There are several examples included:
@@ -83,9 +93,9 @@ ensure all the auxilliary files (eg table of contents) are created. You will
 also have to run `bibtex` to generate the bibliography, and then run `pdflatex`
 again, afterwards.
 
-To simply this process, you may find [Latexmk][5] to be useful.
+To simply this process, you may find [Latexmk][6] to be useful.
 
-[5]: http://www.phys.psu.edu/~collins/software/latexmk-jcc/
+[6]: http://www.phys.psu.edu/~collins/software/latexmk-jcc/
 
 Latexmk will run `pdflatex` and `bibtex` as many times as is necessary for you,
 so you only need to call it once. See Makefile.example.
