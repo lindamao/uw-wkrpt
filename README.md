@@ -136,6 +136,34 @@ line, just add `\usepackage{foo}`, where `foo` is the package name.
 * ltxtable: for a merge of longtable and tabularx, which may not work.
 * times, mathptm: for using the Times font in your text and math.
 
+# Status of this project
+
+**I am looking for a new maintainer for this project. In the meantime, I am more
+than happy to review and accept PRs.**
+
+---
+
+This LaTeX class was originally created by Simon Law in 2002. In 2011, Casey
+Banner created a GitHub repo for this class and made some updates. All other
+uw-wkrpt repos on GitHub are forks of Casey's repo.
+
+In 2012, I significantly updated the class to match the latest requirements for
+the software engineering program. I am reasonably confident that the class
+conforms to the SE work report guidelines of Fall 2012.
+
+However, there is still much work to be done. The SE guidelines are at best two
+years outdated, and the other guidelines are eleven years outdated. A lot of
+LaTeX conventions and best practices have changed over the last decade. The
+class is in need of a major update (or even rewrite).
+
+I no longer have the interest to do this, and am now looking for a new
+maintainer for this project. If you are interested, please let me know.
+
+This class has helped many students with the formatting of their work reports,
+and I hope it will continue to do so.
+
+-- Ming-Ho Yee, 2014-05-25
+
 # Contributors
 
 -- Simon Law <sfllaw@uwaterloo.ca>  Wed, 30 Apr 2003 19:34:41 -0400
